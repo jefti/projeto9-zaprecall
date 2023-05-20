@@ -2,16 +2,18 @@ import { useState } from "react"
 import React from "react";
 import styled from "styled-components"
 
-export default function FlashCards(){
+export default function FlashCards({el,id,responder}){
+    const {answer, question} = el;
     const [estado, setEstado] = React.useState(0);
     const [estadoTexto, setEstadoTexto] = React.useState({cor:'black',estilo:'none'});
-    console.log(estadoTexto);
+
     function MudarEstado(){
         if(estado <2){
         const novoestado = Number(estado) +1;
         setEstado(novoestado);
         //alert('novo estado é ' + novoestado)
         } else{
+            responder();
             setEstado(0);
         }
     }
@@ -26,7 +28,7 @@ export default function FlashCards(){
         <>
             {estado === 0 &&
                 <Estado1>
-                    <Texto color={estadoTexto.cor} estilo = {estadoTexto.estilo}>flashcards </Texto>
+                    <Texto color={estadoTexto.cor} estilo = {estadoTexto.estilo}>Pergunta {id +1} </Texto>
                     {estadoTexto.cor === 'black' &&
                         <img src="/assets/seta_play.png" alt="play" onClick={()=> MudarEstado()} />
                     }
@@ -50,14 +52,14 @@ export default function FlashCards(){
 
             {estado === 1 &&
                 <Estado2>
-                    <p>Pergunta</p>
+                    <p>{question}</p>
                     <img src="/assets/seta_virar.png" alt="play" onClick={()=> MudarEstado()} />
                 </Estado2>
             }
 
             {estado === 2 &&
                 <Estado3>
-                <p>Resposta</p>
+                <p>{answer}</p>
                 <Botoes>
                     <BtnRegistro color={'#FF3030'} onClick={()=> MudarTexto('#FF3030')}>Não lembrei</BtnRegistro>
                     <BtnRegistro color={'#FF922E'} onClick={()=> MudarTexto('#FF922E')}>Quase não lembrei</BtnRegistro>

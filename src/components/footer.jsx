@@ -1,9 +1,10 @@
 import styled from "styled-components"
 
-export default function Footer(){
+export default function Footer({cards, respondidas}){
+    console.log('foram respondidas : ' + respondidas)
     return(
         <Container>
-            0/8 CONCLUÍDOS
+            {respondidas + "/" + cards.length + " CONCLUÍDOS"}
         </Container>
     )
 }

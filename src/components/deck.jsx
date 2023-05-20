@@ -1,10 +1,12 @@
 import styled from "styled-components";
 import FlashCards from "./flashcards";
 
-export default function Deck(){
+export default function Deck({cards, responder}){
+const elementos = cards.map((el,i)=> <FlashCards key = {"pergunta " + i} el={el} id = {i} responder = {responder} />)
+
     return (
         <Container>
-            <FlashCards/>
+            {elementos}
         </Container>
     )
 }
