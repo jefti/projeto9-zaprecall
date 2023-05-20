@@ -4,7 +4,7 @@ import styled from "styled-components"
 
 export default function FlashCards(){
     const [estado, setEstado] = React.useState(0);
-    const [estadoTexto, setEstadoTexto] = React.useState('black');
+    const [estadoTexto, setEstadoTexto] = React.useState({cor:'black',estilo:'none'});
     console.log(estadoTexto);
     function MudarEstado(){
         if(estado <2){
@@ -16,15 +16,35 @@ export default function FlashCards(){
         }
     }
     function MudarTexto(cor){
-        setEstadoTexto(cor);
+        let novoEstado = {...estadoTexto}
+        novoEstado.cor = cor;
+        novoEstado.estilo = 'line-through';
+        setEstadoTexto(novoEstado);
         MudarEstado();
     }
     return (
         <>
             {estado === 0 &&
                 <Estado1>
-                    <Texto color={estadoTexto}>flashcards {estado} </Texto>
-                    <img src="/assets/seta_play.png" alt="play" onClick={()=> MudarEstado()} />
+                    <Texto color={estadoTexto.cor} estilo = {estadoTexto.estilo}>flashcards </Texto>
+                    {estadoTexto.cor === 'black' &&
+                        <img src="/assets/seta_play.png" alt="play" onClick={()=> MudarEstado()} />
+                    }
+                                    
+                    {estadoTexto.cor === '#FF3030' &&
+                        <img src="/assets/icone_erro.png" alt="play" />
+                    }
+
+                    {estadoTexto.cor === '#FF922E' &&
+                        <img src="/assets/icone_quase.png" alt="play" />
+                    }
+
+                    {estadoTexto.cor === '#2FBE34' &&
+                        <img src="/assets/icone_certo.png" alt="play" />
+                    }
+                
+                
+                
                 </Estado1>
             }
 
@@ -39,9 +59,9 @@ export default function FlashCards(){
                 <Estado3>
                 <p>Resposta</p>
                 <Botoes>
-                    <BtnRegistro color={'#FF3030'} onClick={()=> MudarTexto('red')}>Não lembrei</BtnRegistro>
-                    <BtnRegistro color={'#FF922E'} onClick={()=> MudarTexto('#FF3030')}>Quase não lembrei</BtnRegistro>
-                    <BtnRegistro color={'#2FBE34'} onClick={()=> MudarTexto('#FF3030')}>Zap!</BtnRegistro>
+                    <BtnRegistro color={'#FF3030'} onClick={()=> MudarTexto('#FF3030')}>Não lembrei</BtnRegistro>
+                    <BtnRegistro color={'#FF922E'} onClick={()=> MudarTexto('#FF922E')}>Quase não lembrei</BtnRegistro>
+                    <BtnRegistro color={'#2FBE34'} onClick={()=> MudarTexto('#2FBE34')}>Zap!</BtnRegistro>
                 </Botoes>
                 
                 </Estado3>
@@ -143,5 +163,5 @@ const Texto = styled.p`
         font-size: 16px;
         line-height: 19px;
         color: ${(props) => props.color};
-        text-decoration: ${estadoTexto=='black'?'none':'line-through'}
+        text-decoration: ${(props) => props.estilo};
 `
