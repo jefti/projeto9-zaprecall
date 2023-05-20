@@ -27,22 +27,22 @@ export default function FlashCards({el,id,responder}){
     return (
         <>
             {estado === 0 &&
-                <Estado1>
-                    <Texto color={estadoTexto.cor} estilo = {estadoTexto.estilo}>Pergunta {id +1} </Texto>
+                <Estado1 data-test="flashcard" >
+                    <Texto color={estadoTexto.cor} estilo = {estadoTexto.estilo} data-test="flashcard-text">Pergunta {id +1} </Texto>
                     {estadoTexto.cor === 'black' &&
-                        <img src="/assets/seta_play.png" alt="play" onClick={()=> MudarEstado()} />
+                        <img src="/assets/seta_play.png" alt="play" onClick={()=> MudarEstado()} data-test="play-btn"/>
                     }
                                     
                     {estadoTexto.cor === '#FF3030' &&
-                        <img src="/assets/icone_erro.png" alt="play" />
+                        <img src="/assets/icone_erro.png" alt="play" data-test="no-icon"/>
                     }
 
                     {estadoTexto.cor === '#FF922E' &&
-                        <img src="/assets/icone_quase.png" alt="play" />
+                        <img src="/assets/icone_quase.png" alt="play" data-test="partial-icon" />
                     }
 
                     {estadoTexto.cor === '#2FBE34' &&
-                        <img src="/assets/icone_certo.png" alt="play" />
+                        <img src="/assets/icone_certo.png" alt="play" data-test="zap-icon"/>
                     }
                 
                 
@@ -51,19 +51,19 @@ export default function FlashCards({el,id,responder}){
             }
 
             {estado === 1 &&
-                <Estado2>
-                    <p>{question}</p>
-                    <img src="/assets/seta_virar.png" alt="play" onClick={()=> MudarEstado()} />
+                <Estado2 data-test="flashcard">
+                    <p data-test="flashcard-text">{question}</p>
+                    <img src="/assets/seta_virar.png" alt="play" onClick={()=> MudarEstado()} data-test="turn-btn"/>
                 </Estado2>
             }
 
             {estado === 2 &&
-                <Estado3>
-                <p>{answer}</p>
+                <Estado3 data-test="flashcard">
+                <p data-test="flashcard-text">{answer}</p>
                 <Botoes>
-                    <BtnRegistro color={'#FF3030'} onClick={()=> MudarTexto('#FF3030')}>Não lembrei</BtnRegistro>
-                    <BtnRegistro color={'#FF922E'} onClick={()=> MudarTexto('#FF922E')}>Quase não lembrei</BtnRegistro>
-                    <BtnRegistro color={'#2FBE34'} onClick={()=> MudarTexto('#2FBE34')}>Zap!</BtnRegistro>
+                    <BtnRegistro color={'#FF3030'} onClick={()=> MudarTexto('#FF3030')} data-test="no-btn">Não lembrei</BtnRegistro>
+                    <BtnRegistro color={'#FF922E'} onClick={()=> MudarTexto('#FF922E')} data-test="partial-btn">Quase não lembrei</BtnRegistro>
+                    <BtnRegistro color={'#2FBE34'} onClick={()=> MudarTexto('#2FBE34')} data-test="zap-btn">Zap!</BtnRegistro>
                 </Botoes>
                 
                 </Estado3>

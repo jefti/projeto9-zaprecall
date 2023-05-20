@@ -3,7 +3,7 @@ import styled from "styled-components"
 export default function Footer({cards, respondidas}){
     console.log('foram respondidas : ' + respondidas)
     return(
-        <Container>
+        <Container data-test="footer">
             {respondidas + "/" + cards.length + " CONCLUÍDOS"}
         </Container>
     )

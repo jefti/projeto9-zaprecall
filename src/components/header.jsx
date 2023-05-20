@@ -2,7 +2,7 @@ import styled from "styled-components"
 export default function Header(){
     return (
     <Topo>
-        <img src="./public/assets/logo2.png" alt="Logo" />
+        <img src="/assets/logo2.png" alt="Logo" />
         <p>ZapRecall</p>
     </Topo>
     )
